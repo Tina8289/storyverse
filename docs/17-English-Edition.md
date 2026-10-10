@@ -2,7 +2,7 @@
 
 Author credit: Samiyah. Chinese credit remains 我愛睡大覺.
 
-Published scope: English title, synopsis, Chapter One: Ruins in the Rain, Chapter Two, Chapter Three, and Chapter Four. Chapter one contains 130 paragraphs corresponding to the 130 Chinese paragraphs. Chinese text remains unchanged. Chapter two contains 171 corresponding paragraphs. Chapter three contains 85 corresponding paragraphs. Chapter four contains 112 corresponding paragraphs. Chapters 5–27 have not been translated or published in English.
+Published scope: English title, synopsis, Chapter One: Ruins in the Rain, Chapter Two, Chapter Three, Chapter Four, and Chapter Five. Chapter one contains 130 paragraphs corresponding to the 130 Chinese paragraphs. Chinese text remains unchanged. Chapter two contains 171 corresponding paragraphs. Chapter three contains 85 corresponding paragraphs. Chapter four contains 112 corresponding paragraphs. Chapter five contains 101 corresponding paragraphs. Chapters 6–27 have not been translated or published in English.
 
 Translation retains Nancheng, Jin Xiu Lan Ting, Lu Zheng, Shen Yu’an, Su Wan, Jiang Chi and Xu Yan. Municipal public security bureau, Criminal Investigation Detachment, local police station, major crime team, forensic physician and traffic police retain the original institutional setting. No Western agencies or police ranks are substituted. Team Leader Lu renders 陆队; Dr. Shen renders 沈法医. No plot content is intentionally omitted.
 

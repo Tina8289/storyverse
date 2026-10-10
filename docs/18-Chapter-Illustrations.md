@@ -4,4 +4,6 @@ User requirement: every newly published chapter must include an illustration mat
 
 Chapter 4: investigators arrive at the cordoned Jian’an apartment building at night. AI-generated exterior scene without graphic remains. Asset: public/art/gui-ling-chapter-4.webp, 1672 × 941, 78,046 bytes. Display uses the existing reader-art layout (desktop height 380px, mobile 270px). Chinese and English editions of the same chapter share its illustration. Next Image serves the precompressed asset unchanged to preserve the file-size limit.
 
-Chapters 1–3 and 5–27 still need their own illustrations; this change supplies chapter 4 only.
+Chapter 5: investigators compare missing-person files at a temporary station in an apartment stairwell. AI-generated scene without graphic remains. Asset: public/art/gui-ling-chapter-5.webp, 1672 × 941, 77,048 bytes. Both language editions share this chapter-specific illustration.
+
+Chapters 1–3 and 6–27 still need their own illustrations.
