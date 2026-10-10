@@ -1049,7 +1049,14 @@
         "Work inside the apartment accelerated. The nausea and fear were pushed down beneath the weight of something more urgent."
       ]
     },
-    "sourceUrl": "https://zhuanlan.zhihu.com/p/2086187702559552576"
+    "sourceUrl": "https://zhuanlan.zhihu.com/p/2086187702559552576",
+    "illustration": {
+      "src": "/art/gui-ling-chapter-4.webp",
+      "alt": {
+        "en": "Investigators and a forensic physician approach a cordoned-off apartment building in Jian’an at night.",
+        "zh": "夜晚，刑侦队员与法医走向建安小区拉起警戒线的老旧居民楼。"
+      }
+    }
   },
   {
     "slug": "chapter-5",

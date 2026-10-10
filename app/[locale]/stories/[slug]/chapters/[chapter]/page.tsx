@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { StoryStructuredData } from "@/components/StoryStructuredData";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -59,6 +60,18 @@ export default async function ChapterPage({ params }: Props) {
         ) : null}
         {story.sample ? <SampleNote locale={l} /> : null}
       </header>
+      {entry.illustration ? (
+        <div className="container reader-art">
+          <Image
+            src={entry.illustration.src}
+            alt={entry.illustration.alt[l]}
+            fill
+            priority
+            unoptimized
+            sizes="100vw"
+          />
+        </div>
+      ) : null}
       <div className="reading prose journal-prose">
         {entry.paragraphs[l].map((p, i) => (
           <p key={i} style={{ whiteSpace: "pre-line" }}>
