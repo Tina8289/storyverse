@@ -1,12 +1,10 @@
 export const siteConfig = {
   name: "StoryVerse",
   tagline: "Build Worlds.",
-  description: "A global original IP platform for stories, journeys, and future worlds.",
-  nav: [
-    { label: "Home", href: "/" },
-    { label: "Stories", href: "/stories" },
-    { label: "Journal", href: "/journal" },
-    { label: "About", href: "/about" },
-    { label: "Contact", href: "/contact" },
-  ],
+  url:
+    process.env.NEXT_PUBLIC_SITE_URL ||
+    (process.env.VERCEL_PROJECT_PRODUCTION_URL
+      ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+      : "http://localhost:3000"),
+  email: process.env.NEXT_PUBLIC_CONTACT_EMAIL || "samiyah.china@gmail.com",
 };

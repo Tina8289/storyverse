@@ -1,13 +1,21 @@
 :root {
   --color-primary: #5b5ceb;
-  --color-text: #111111;
-  --color-muted: #666666;
+  --color-primary-hover: #4748cc;
+  --color-text: #161625;
+  --color-muted: #666673;
   --color-bg: #fafafa;
   --color-surface: #ffffff;
-  --color-border: #ececec;
+  --color-border: #e6e6ec;
   --color-accent: #ffd166;
-  --max-width: 1400px;
-  --reading-width: 820px;
+  --color-tint: #f0f0fb;
+  --max-width: 1280px;
+  --reading-width: 720px;
   --radius-card: 16px;
-  --section-spacing: 120px;
+  --section-spacing: 112px;
+  --font-sans:
+    "Inter", "MiSans", "HarmonyOS Sans", "Source Han Sans SC", "PingFang SC",
+    "Microsoft YaHei", sans-serif;
+  --font-reading:
+    "Iowan Old Style", "Palatino Linotype", "Noto Serif CJK SC", "Songti SC",
+    Georgia, serif;
 }
