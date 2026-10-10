@@ -4,6 +4,10 @@ StoryVerse is a global original IP platform where a Chinese creator writes in Ch
 
 It starts as a simple reading website, then grows into a long-term content ecosystem for stories, journals, characters, worlds, newsletters, comics, animation, and future licensing.
 
+## Current Status
+
+Task 001 is started: the repository now includes a Next.js V1 scaffold with the first five pages and shared design components.
+
 ## V1 Goal
 
 Launch a simple, expandable platform:
@@ -21,6 +25,16 @@ Launch a simple, expandable platform:
 - Vercel
 - Supabase
 - ChatGPT / Codex for writing, translation, SEO, and development assistance
+
+## Code Structure
+
+| Path | Purpose |
+|---|---|
+| `app/` | Next.js App Router pages and global styles |
+| `components/` | Reusable UI components: Header, Footer, Hero, StoryCard, Newsletter |
+| `lib/` | Site constants and starter content data |
+| `styles/` | Design tokens from the StoryVerse design system |
+| `docs/` | Product, design, SEO, database, AI workflow, and roadmap documents |
 
 ## Development Principles
 
@@ -49,11 +63,18 @@ Launch a simple, expandable platform:
 | `docs/11-Design-System.md` | Official visual style, fonts, colors, logo, components |
 | `docs/12-Development-Tasks.md` | Next development tasks for Codex / Cursor / Vercel |
 
+## Local Development
+
+```bash
+npm install
+npm run dev
+```
+
+Then open `http://localhost:3000`.
+
 ## Current Priority
 
-Move from concept discussion to execution:
-
-1. Initialize the Next.js project.
-2. Apply the design system.
-3. Build the first five pages.
+1. Review the V1 pages visually.
+2. Replace placeholder story content with real StoryVerse content.
+3. Add Supabase only after the static V1 pages are approved.
 4. Deploy V1 to Vercel.
