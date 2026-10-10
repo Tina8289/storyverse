@@ -5,7 +5,13 @@ import { useState } from "react";
 import { Globe2, Menu, X, Search } from "lucide-react";
 import { navigation, text, type Locale } from "@/lib/i18n";
 import { Brand } from "./Brand";
-export function Header({ locale }: { locale: Locale }) {
+export function Header({
+  locale,
+  unavailable = [],
+}: {
+  locale: Locale;
+  unavailable?: string[];
+}) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const other = locale === "en" ? "zh" : "en";
@@ -52,8 +58,8 @@ export function Header({ locale }: { locale: Locale }) {
           <Link
             className="language-link"
             href={
-              pathname.startsWith("/zh/stories/gui-ling-tui-yan")
-                ? "/en/stories"
+              unavailable.includes(pathname)
+                ? `/${other}/stories/${pathname.split("/")[3]}`
                 : pathname.replace(/^\/(en|zh)(?=\/|$)/, `/${other}`)
             }
             hrefLang={other === "zh" ? "zh-CN" : "en"}

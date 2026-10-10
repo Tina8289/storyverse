@@ -11,7 +11,7 @@ import {
   Sparkles,
   Tag,
 } from "lucide-react";
-import { stories, availableIn } from "@/lib/content";
+import { localizedStories } from "@/lib/content";
 import { text, type Locale } from "@/lib/i18n";
 import { siteConfig } from "@/lib/site";
 export function Inspiration({ locale: l }: { locale: Locale }) {
@@ -93,7 +93,7 @@ function HomeHeading({
   );
 }
 export function FeaturedStory({ locale: l }: { locale: Locale }) {
-  const story = stories.find((s) => availableIn(s, l))!;
+  const story = localizedStories(l)[0];
   return (
     <section className="home-section">
       <HomeHeading
@@ -125,7 +125,9 @@ export function FeaturedStory({ locale: l }: { locale: Locale }) {
               <p>
                 {text(
                   l,
-                  "A notebook, an impossible door, and the courage to imagine what comes next. Begin with a short journey into a world still taking shape.",
+                  story.sample
+                    ? "A notebook, an impossible door, and the courage to imagine what comes next. Begin with a short journey into a world still taking shape."
+                    : `By ${story.author}. English translation in progress.`,
                   story.sample
                     ? "一本笔记，一扇不可能出现的门，以及想象下一步的勇气。从一段短篇开始，走进正在成形的世界。"
                     : `作者：${story.author}。全 ${story.format === "serial" ? story.chapters.length : 1} 章，已完结。`,
@@ -144,12 +146,16 @@ export function FeaturedStory({ locale: l }: { locale: Locale }) {
                 <BookOpen size={17} aria-hidden="true" />
                 {story.sample
                   ? text(l, "Sample short", "示例短篇")
-                  : "已完结连载"}
+                  : text(l, "Translation in progress", "已完结连载")}
               </li>
               <li>
                 <Clock3 size={17} aria-hidden="true" />
                 {story.format === "serial"
-                  ? `${story.chapters.length} 章 · 中文原文`
+                  ? text(
+                      l,
+                      `${story.chapters.length} of ${story.translationTotal ?? story.chapters.length} chapters`,
+                      `${story.chapters.length} 章 · 中文原文`,
+                    )
                   : text(l, "A quiet reading moment", "片刻阅读时光")}
               </li>
               <li>

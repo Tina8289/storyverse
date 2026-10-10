@@ -17,6 +17,8 @@ export type StoryBase = {
   sample: boolean;
   availableLocales?: Locale[];
   author?: string;
+  authorNames?: Partial<Localized>;
+  translationTotal?: number;
   sourceUrl?: string;
 };
 export type Chapter = {
@@ -42,10 +44,10 @@ export function availableIn(story: Story, locale: Locale) {
 export const stories: Story[] = [
   {
     slug: "gui-ling-tui-yan",
-    title: { zh: "歸零推演", en: "" },
+    title: { zh: "歸零推演", en: "The Zero Hypothesis" },
     summary: {
       zh: "南城雨夜，一通匿名报警打破平静。重案组队长陆峥与法医沈予安走入层层迷局，在现场、证物与人心之间追寻真相。",
-      en: "",
+      en: "An anonymous call breaks the quiet of a rainy night in Nancheng. Major crime team leader Lu Zheng and forensic physician Shen Yu’an follow the evidence into a maze of concealed motives and uncertain trust.",
     },
     genre: "crime",
     genreName: { zh: "刑侦悬疑", en: "Crime & mystery" },
@@ -53,8 +55,9 @@ export const stories: Story[] = [
     sample: false,
     format: "serial",
     status: "completed",
-    availableLocales: ["zh"],
+    availableLocales: ["zh", "en"],
     author: "我愛睡大覺",
+    authorNames: { zh: "我愛睡大覺", en: "Samiyah" },
     sourceUrl: "https://zhuanlan.zhihu.com/c_2086175986899489498",
     chapters: guiLingChapters,
   },
@@ -230,3 +233,28 @@ export const journals: Journal[] = [
     },
   },
 ];
+
+export function chapterLocales(story: Story, chapter: Chapter): Locale[] {
+  return (story.availableLocales ?? ["en", "zh"]).filter(
+    (l) => chapter.title[l] && chapter.paragraphs[l].length > 0,
+  );
+}
+export function localizedStories(locale: Locale): Story[] {
+  return stories
+    .filter((s) => availableIn(s, locale))
+    .map((s) => {
+      const author = s.authorNames?.[locale] ?? s.author;
+      if (s.format !== "serial") return { ...s, author };
+      const chapters = s.chapters.filter((c) =>
+        chapterLocales(s, c).includes(locale),
+      );
+      const incomplete = chapters.length < s.chapters.length;
+      return {
+        ...s,
+        author,
+        chapters,
+        status: incomplete ? "ongoing" : s.status,
+        translationTotal: incomplete ? s.chapters.length : undefined,
+      };
+    });
+}

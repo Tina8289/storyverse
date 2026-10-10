@@ -1,7 +1,12 @@
 import { StoryStructuredData } from "@/components/StoryStructuredData";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { stories, availableIn } from "@/lib/content";
+import {
+  stories,
+  availableIn,
+  localizedStories,
+  chapterLocales,
+} from "@/lib/content";
 import { getLocale } from "@/lib/locale";
 import { text } from "@/lib/i18n";
 import { pageMetadata } from "@/lib/seo";
@@ -11,7 +16,7 @@ type Props = {
   params: Promise<{ locale: string; slug: string; chapter: string }>;
 };
 function findChapter(slug: string, chapter: string, locale: "en" | "zh") {
-  const story = stories.find((s) => s.slug === slug);
+  const story = localizedStories(locale).find((s) => s.slug === slug);
   if (!story || !availableIn(story, locale) || story.format !== "serial")
     notFound();
   const index = story.chapters.findIndex((c) => c.slug === chapter);
@@ -28,7 +33,10 @@ export async function generateMetadata({ params }: Props) {
     `${entry.title[l]} — ${story.title[l]}`,
     `${entry.title[l]}，${story.title[l]}。${story.summary[l]}`,
     story.sample,
-    story.availableLocales,
+    chapterLocales(
+      stories.find((s) => s.slug === slug)!,
+      entry,
+    ),
   );
 }
 export default async function ChapterPage({ params }: Props) {
@@ -46,7 +54,9 @@ export default async function ChapterPage({ params }: Props) {
           {text(l, `Chapter ${index + 1}`, `第 ${index + 1} 章`)}
         </p>
         <h1>{entry.title[l]}</h1>
-        {story.author ? <p>作者：{story.author}</p> : null}
+        {story.author ? (
+          <p>{text(l, `By ${story.author}`, `作者：${story.author}`)}</p>
+        ) : null}
         {story.sample ? <SampleNote locale={l} /> : null}
       </header>
       <div className="reading prose journal-prose">
@@ -60,8 +70,14 @@ export default async function ChapterPage({ params }: Props) {
         {entry.sourceUrl ? (
           <p>
             <a className="text-link" href={entry.sourceUrl}>
-              本章知乎原文 ↗
+              {text(l, "Read the Chinese source on Zhihu ↗", "本章知乎原文 ↗")}
             </a>
+          </p>
+        ) : null}
+        {story.translationTotal ? (
+          <p>
+            Translation in progress · {story.chapters.length} of{" "}
+            {story.translationTotal} chapters available.
           </p>
         ) : null}
         <ChapterNavigation story={story} index={index} locale={l} />

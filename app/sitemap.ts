@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { siteConfig } from "@/lib/site";
 import { locales, navigation } from "@/lib/i18n";
-import { stories } from "@/lib/content";
+import { stories, chapterLocales } from "@/lib/content";
 export default function sitemap(): MetadataRoute.Sitemap {
   const entries = [
     ...navigation.map((item) => ({ path: item.path, languages: [...locales] })),
@@ -15,7 +15,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         ...(s.format === "serial"
           ? s.chapters.map((c) => ({
               path: `/stories/${s.slug}/chapters/${c.slug}`,
-              languages: s.availableLocales ?? [...locales],
+              languages: chapterLocales(s, c),
             }))
           : []),
       ]),

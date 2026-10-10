@@ -1,7 +1,7 @@
 import { PageIntro, JourneyCTA } from "@/components/ui";
 import { StoryLibrary } from "@/components/StoryLibrary";
 import { parseCollection, genres } from "@/lib/story-categories";
-import { stories, availableIn } from "@/lib/content";
+import { localizedStories } from "@/lib/content";
 import { getLocale } from "@/lib/locale";
 import { text } from "@/lib/i18n";
 import { pageMetadata } from "@/lib/seo";
@@ -47,19 +47,17 @@ export default async function Stories({ params, searchParams }: Props) {
       />
       <StoryLibrary
         key={`${collection}:${genre}`}
-        stories={stories
-          .filter((s) => availableIn(s, locale))
-          .map((s) =>
-            s.format === "serial"
-              ? {
-                  ...s,
-                  chapters: s.chapters.map((c) => ({
-                    ...c,
-                    paragraphs: { en: [], zh: [] },
-                  })),
-                }
-              : { ...s, paragraphs: { en: [], zh: [] } },
-          )}
+        stories={localizedStories(locale).map((s) =>
+          s.format === "serial"
+            ? {
+                ...s,
+                chapters: s.chapters.map((c) => ({
+                  ...c,
+                  paragraphs: { en: [], zh: [] },
+                })),
+              }
+            : { ...s, paragraphs: { en: [], zh: [] } },
+        )}
         locale={locale}
         initialGenre={genre}
         collection={collection}

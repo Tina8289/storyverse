@@ -4,7 +4,11 @@ import { storyLabel } from "@/lib/story-categories";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { stories, availableIn } from "@/lib/content";
+import {
+  stories,
+  availableIn,
+  localizedStories as getLocalizedStories,
+} from "@/lib/content";
 import { getLocale } from "@/lib/locale";
 import { text } from "@/lib/i18n";
 import { pageMetadata } from "@/lib/seo";
@@ -30,7 +34,7 @@ export async function generateMetadata({ params }: Props) {
 export default async function Story({ params }: Props) {
   const { locale, slug } = await params;
   const l = getLocale(locale);
-  const localizedStories = stories.filter((s) => availableIn(s, l));
+  const localizedStories = getLocalizedStories(l);
   const index = localizedStories.findIndex((s) => s.slug === slug);
   if (index === -1) notFound();
   const story = localizedStories[index];
@@ -48,10 +52,25 @@ export default async function Story({ params }: Props) {
           </p>
           <h1>{story.title[l]}</h1>
           <p className="intro-summary">{story.summary[l]}</p>
-          {story.author ? <p>作者：{story.author} · 中文原文</p> : null}
+          {story.author ? (
+            <p>
+              {text(
+                l,
+                `By ${story.author} · English translation`,
+                `作者：${story.author} · 中文原文`,
+              )}
+            </p>
+          ) : null}
+          {story.translationTotal && story.format === "serial" ? (
+            <p className="sample-note">
+              Translation in progress · {story.chapters.length} of{" "}
+              {story.translationTotal} chapters available. The Chinese original
+              is complete.
+            </p>
+          ) : null}
           {story.sourceUrl ? (
             <a className="text-link" href={story.sourceUrl}>
-              知乎原作 ↗
+              {text(l, "Original on Zhihu ↗", "知乎原作 ↗")}
             </a>
           ) : null}
           {story.sample ? <SampleNote locale={l} /> : null}

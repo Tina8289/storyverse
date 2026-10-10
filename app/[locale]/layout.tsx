@@ -1,3 +1,4 @@
+import { stories, chapterLocales } from "@/lib/content";
 import { getLocale } from "@/lib/locale";
 import type { Metadata } from "next";
 import { Header } from "@/components/Header";
@@ -32,7 +33,21 @@ export default async function LocaleLayout({
         <a className="skip-link" href="#main">
           {text(locale, "Skip to content", "跳转到正文")}
         </a>
-        <Header locale={locale} />
+        <Header
+          locale={locale}
+          unavailable={stories.flatMap((s) =>
+            s.format === "serial"
+              ? s.chapters
+                  .filter(
+                    (c) =>
+                      !chapterLocales(s, c).includes(
+                        locale === "en" ? "zh" : "en",
+                      ),
+                  )
+                  .map((c) => `/${locale}/stories/${s.slug}/chapters/${c.slug}`)
+              : [],
+          )}
+        />
         <main id="main">{children}</main>
         <Footer locale={locale} />
       </body>
