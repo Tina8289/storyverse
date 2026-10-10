@@ -1,3 +1,4 @@
+import guiLingChapters from "@/content/stories/gui-ling-tui-yan.json";
 import type { Locale } from "./i18n";
 export type Localized = Record<Locale, string>;
 export type StoryBase = {
@@ -5,6 +6,7 @@ export type StoryBase = {
   title: Localized;
   summary: Localized;
   genre:
+    | "crime"
     | "fantasy"
     | "science-fiction"
     | "adventure"
@@ -13,8 +15,12 @@ export type StoryBase = {
   genreName: Localized;
   art: string;
   sample: boolean;
+  availableLocales?: Locale[];
+  author?: string;
+  sourceUrl?: string;
 };
 export type Chapter = {
+  sourceUrl?: string;
   slug: string;
   title: Localized;
   paragraphs: Record<Locale, string[]>;
@@ -30,7 +36,28 @@ export type SerialStory = StoryBase & {
   chapters: Chapter[];
 };
 export type Story = ShortStory | SerialStory;
+export function availableIn(story: Story, locale: Locale) {
+  return !story.availableLocales || story.availableLocales.includes(locale);
+}
 export const stories: Story[] = [
+  {
+    slug: "gui-ling-tui-yan",
+    title: { zh: "歸零推演", en: "" },
+    summary: {
+      zh: "南城雨夜，一通匿名报警打破平静。重案组队长陆峥与法医沈予安走入层层迷局，在现场、证物与人心之间追寻真相。",
+      en: "",
+    },
+    genre: "crime",
+    genreName: { zh: "刑侦悬疑", en: "Crime & mystery" },
+    art: "/art/gui-ling-tui-yan.svg",
+    sample: false,
+    format: "serial",
+    status: "completed",
+    availableLocales: ["zh"],
+    author: "我愛睡大覺",
+    sourceUrl: "https://zhuanlan.zhihu.com/c_2086175986899489498",
+    chapters: guiLingChapters,
+  },
   {
     slug: "the-first-world",
     title: { en: "The First World", zh: "第一个世界" },

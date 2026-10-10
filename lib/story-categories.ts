@@ -38,6 +38,7 @@ export function parseCollection(value?: string): Collection {
     : "all";
 }
 export const genres = [
+  { value: "crime", en: "Crime & mystery", zh: "刑侦悬疑" },
   { value: "fantasy", en: "Fantasy", zh: "奇幻" },
   { value: "science-fiction", en: "Science fiction", zh: "科幻" },
   { value: "adventure", en: "Adventure", zh: "冒险" },

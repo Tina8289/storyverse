@@ -3,27 +3,33 @@ import { siteConfig } from "@/lib/site";
 import { locales, navigation } from "@/lib/i18n";
 import { stories } from "@/lib/content";
 export default function sitemap(): MetadataRoute.Sitemap {
-  const paths = [
-    ...navigation.map((item) => item.path),
+  const entries = [
+    ...navigation.map((item) => ({ path: item.path, languages: [...locales] })),
     ...stories
-      .filter((story) => !story.sample)
-      .flatMap((story) => [
-        `/stories/${story.slug}`,
-        ...(story.format === "serial"
-          ? story.chapters.map(
-              (chapter) => `/stories/${story.slug}/chapters/${chapter.slug}`,
-            )
+      .filter((s) => !s.sample)
+      .flatMap((s) => [
+        {
+          path: `/stories/${s.slug}`,
+          languages: s.availableLocales ?? [...locales],
+        },
+        ...(s.format === "serial"
+          ? s.chapters.map((c) => ({
+              path: `/stories/${s.slug}/chapters/${c.slug}`,
+              languages: s.availableLocales ?? [...locales],
+            }))
           : []),
       ]),
   ];
-  return locales.flatMap((locale) =>
-    paths.map((path) => ({
+  return entries.flatMap(({ path, languages }) =>
+    languages.map((locale) => ({
       url: `${siteConfig.url}/${locale}${path}`,
       alternates: {
-        languages: {
-          en: `${siteConfig.url}/en${path}`,
-          "zh-CN": `${siteConfig.url}/zh${path}`,
-        },
+        languages: Object.fromEntries(
+          languages.map((l) => [
+            l === "zh" ? "zh-CN" : l,
+            `${siteConfig.url}/${l}${path}`,
+          ]),
+        ),
       },
     })),
   );

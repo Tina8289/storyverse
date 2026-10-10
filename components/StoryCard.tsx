@@ -11,9 +11,11 @@ export function StoryCard({ story, locale }: { story: Story; locale: Locale }) {
         <div className="story-cover">
           <Image
             src={
-              story.art === "door"
-                ? "/art/storyverse-hero.png"
-                : "/art/storyverse-worlds.png"
+              story.art.startsWith("/")
+                ? story.art
+                : story.art === "door"
+                  ? "/art/storyverse-hero.png"
+                  : "/art/storyverse-worlds.png"
             }
             alt=""
             fill

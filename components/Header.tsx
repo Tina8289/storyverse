@@ -51,7 +51,11 @@ export function Header({ locale }: { locale: Locale }) {
           </Link>
           <Link
             className="language-link"
-            href={pathname.replace(/^\/(en|zh)(?=\/|$)/, `/${other}`)}
+            href={
+              pathname.startsWith("/zh/stories/gui-ling-tui-yan")
+                ? "/en/stories"
+                : pathname.replace(/^\/(en|zh)(?=\/|$)/, `/${other}`)
+            }
             hrefLang={other === "zh" ? "zh-CN" : "en"}
             aria-label={text(locale, "切换到中文", "Switch to English")}
             onClick={() => setOpen(false)}

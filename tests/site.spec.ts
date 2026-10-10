@@ -138,7 +138,7 @@ test("separate short stories and serials with honest empty states", async ({
     categories.getByRole("link", { name: /连载中/ }),
   ).toHaveAttribute("aria-current", "page");
   await categories.getByRole("link", { name: /已完结长篇/ }).click();
-  await expect(page.locator(".story-card")).toHaveCount(0);
+  await expect(page.locator(".story-card")).toHaveCount(1);
   await categories.getByRole("link", { name: /独立短篇/ }).click();
   await expect(page.locator(".sample-library .story-card")).toHaveCount(3);
   await page.getByRole("button", { name: "奇幻", exact: true }).click();

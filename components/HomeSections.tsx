@@ -11,7 +11,7 @@ import {
   Sparkles,
   Tag,
 } from "lucide-react";
-import { stories } from "@/lib/content";
+import { stories, availableIn } from "@/lib/content";
 import { text, type Locale } from "@/lib/i18n";
 import { siteConfig } from "@/lib/site";
 export function Inspiration({ locale: l }: { locale: Locale }) {
@@ -93,19 +93,21 @@ function HomeHeading({
   );
 }
 export function FeaturedStory({ locale: l }: { locale: Locale }) {
-  const story = stories[0];
+  const story = stories.find((s) => availableIn(s, l))!;
   return (
     <section className="home-section">
       <HomeHeading
         title={text(l, "Featured story", "最新故事")}
-        badge={text(l, "SAMPLE", "示例")}
+        badge={story.sample ? text(l, "SAMPLE", "示例") : "NEW"}
         href={`/${l}/stories`}
         action={text(l, "View all stories", "查看所有故事")}
       />
       <div className="featured-story">
         <Link className="featured-cover" href={`/${l}/stories/${story.slug}`}>
           <Image
-            src="/art/storyverse-hero.png"
+            src={
+              story.art.startsWith("/") ? story.art : "/art/storyverse-hero.png"
+            }
             alt=""
             fill
             sizes="(max-width: 700px) 100vw, 44vw"
@@ -113,9 +115,7 @@ export function FeaturedStory({ locale: l }: { locale: Locale }) {
           <span>{story.title[l]}</span>
         </Link>
         <div className="featured-copy">
-          <span className="genre-badge">
-            {text(l, "Fantasy · Growing up", "奇幻 · 成长")}
-          </span>
+          <span className="genre-badge">{story.genreName[l]}</span>
           <h3>
             <Link href={`/${l}/stories/${story.slug}`}>{story.title[l]}</Link>
           </h3>
@@ -126,7 +126,9 @@ export function FeaturedStory({ locale: l }: { locale: Locale }) {
                 {text(
                   l,
                   "A notebook, an impossible door, and the courage to imagine what comes next. Begin with a short journey into a world still taking shape.",
-                  "一本笔记，一扇不可能出现的门，以及想象下一步的勇气。从一段短篇开始，走进正在成形的世界。",
+                  story.sample
+                    ? "一本笔记，一扇不可能出现的门，以及想象下一步的勇气。从一段短篇开始，走进正在成形的世界。"
+                    : `作者：${story.author}。全 ${story.format === "serial" ? story.chapters.length : 1} 章，已完结。`,
                 )}
               </p>
               <Link
@@ -140,11 +142,15 @@ export function FeaturedStory({ locale: l }: { locale: Locale }) {
             <ul className="featured-facts">
               <li>
                 <BookOpen size={17} aria-hidden="true" />
-                {text(l, "Sample short", "示例短篇")}
+                {story.sample
+                  ? text(l, "Sample short", "示例短篇")
+                  : "已完结连载"}
               </li>
               <li>
                 <Clock3 size={17} aria-hidden="true" />
-                {text(l, "A quiet reading moment", "片刻阅读时光")}
+                {story.format === "serial"
+                  ? `${story.chapters.length} 章 · 中文原文`
+                  : text(l, "A quiet reading moment", "片刻阅读时光")}
               </li>
               <li>
                 <Tag size={17} aria-hidden="true" />

@@ -7,6 +7,7 @@ export function pageMetadata(
   title: string,
   description: string,
   sample = false,
+  availableLocales: Locale[] = ["en", "zh"],
 ): Metadata {
   const url = `${siteConfig.url}/${locale}${path}`;
   return {
@@ -16,9 +17,13 @@ export function pageMetadata(
     alternates: {
       canonical: url,
       languages: {
-        en: `${siteConfig.url}/en${path}`,
-        "zh-CN": `${siteConfig.url}/zh${path}`,
-        "x-default": `${siteConfig.url}/en${path}`,
+        ...Object.fromEntries(
+          availableLocales.map((l) => [
+            l === "zh" ? "zh-CN" : l,
+            `${siteConfig.url}/${l}${path}`,
+          ]),
+        ),
+        "x-default": `${siteConfig.url}/${availableLocales[0]}${path}`,
       },
     },
     openGraph: {

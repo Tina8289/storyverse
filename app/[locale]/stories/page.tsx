@@ -1,7 +1,7 @@
 import { PageIntro, JourneyCTA } from "@/components/ui";
 import { StoryLibrary } from "@/components/StoryLibrary";
 import { parseCollection, genres } from "@/lib/story-categories";
-import { stories } from "@/lib/content";
+import { stories, availableIn } from "@/lib/content";
 import { getLocale } from "@/lib/locale";
 import { text } from "@/lib/i18n";
 import { pageMetadata } from "@/lib/seo";
@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: Props) {
     text(
       l,
       "Explore the StoryVerse reading room: fantasy, science fiction, and adventure. Start with a clearly labelled sample while original releases are in preparation.",
-      "探索 StoryVerse 阅览室中的奇幻、科幻和冒险短篇。正式作品筹备期间，可先阅读明确标注的示例故事。",
+      "阅读 StoryVerse 原创故事：独立短篇、连载与已完结长篇，探索刑侦悬疑、奇幻、科幻等题材。",
     ),
   );
 }
@@ -47,7 +47,19 @@ export default async function Stories({ params, searchParams }: Props) {
       />
       <StoryLibrary
         key={`${collection}:${genre}`}
-        stories={stories}
+        stories={stories
+          .filter((s) => availableIn(s, locale))
+          .map((s) =>
+            s.format === "serial"
+              ? {
+                  ...s,
+                  chapters: s.chapters.map((c) => ({
+                    ...c,
+                    paragraphs: { en: [], zh: [] },
+                  })),
+                }
+              : { ...s, paragraphs: { en: [], zh: [] } },
+          )}
         locale={locale}
         initialGenre={genre}
         collection={collection}

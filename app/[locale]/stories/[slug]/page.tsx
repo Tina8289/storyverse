@@ -1,9 +1,10 @@
+import { StoryStructuredData } from "@/components/StoryStructuredData";
 import { SerialContents } from "@/components/SerialContents";
 import { storyLabel } from "@/lib/story-categories";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { stories } from "@/lib/content";
+import { stories, availableIn } from "@/lib/content";
 import { getLocale } from "@/lib/locale";
 import { text } from "@/lib/i18n";
 import { pageMetadata } from "@/lib/seo";
@@ -16,25 +17,28 @@ export async function generateMetadata({ params }: Props) {
   const { locale, slug } = await params;
   const l = getLocale(locale);
   const s = stories.find((s) => s.slug === slug);
-  if (!s) notFound();
+  if (!s || !availableIn(s, l)) notFound();
   return pageMetadata(
     l,
     `/stories/${slug}`,
     s.title[l],
     s.summary[l],
     s.sample,
+    s.availableLocales,
   );
 }
 export default async function Story({ params }: Props) {
   const { locale, slug } = await params;
   const l = getLocale(locale);
-  const index = stories.findIndex((s) => s.slug === slug);
+  const localizedStories = stories.filter((s) => availableIn(s, l));
+  const index = localizedStories.findIndex((s) => s.slug === slug);
   if (index === -1) notFound();
-  const story = stories[index];
-  const next = stories[(index + 1) % stories.length];
+  const story = localizedStories[index];
+  const next = localizedStories[(index + 1) % localizedStories.length];
   return (
     <>
       <article className="story-reader">
+        <StoryStructuredData story={story} locale={l} />
         <header className="reading reader-heading">
           <Link className="back-link" href={`/${l}/stories`}>
             {text(l, "← All stories", "← 全部故事")}
@@ -44,6 +48,12 @@ export default async function Story({ params }: Props) {
           </p>
           <h1>{story.title[l]}</h1>
           <p className="intro-summary">{story.summary[l]}</p>
+          {story.author ? <p>作者：{story.author} · 中文原文</p> : null}
+          {story.sourceUrl ? (
+            <a className="text-link" href={story.sourceUrl}>
+              知乎原作 ↗
+            </a>
+          ) : null}
           {story.sample ? <SampleNote locale={l} /> : null}
           {story.format === "short" ? (
             <a className="text-link" href="#story-text">
@@ -54,9 +64,11 @@ export default async function Story({ params }: Props) {
         <div className="container reader-art">
           <Image
             src={
-              story.art === "door"
-                ? "/art/storyverse-hero.png"
-                : "/art/storyverse-worlds.png"
+              story.art.startsWith("/")
+                ? story.art
+                : story.art === "door"
+                  ? "/art/storyverse-hero.png"
+                  : "/art/storyverse-worlds.png"
             }
             alt=""
             fill
