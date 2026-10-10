@@ -1,14 +1,35 @@
 import type { Locale } from "./i18n";
 export type Localized = Record<Locale, string>;
-export type Story = {
+export type StoryBase = {
   slug: string;
   title: Localized;
   summary: Localized;
-  genre: "fantasy" | "science-fiction" | "adventure";
+  genre:
+    | "fantasy"
+    | "science-fiction"
+    | "adventure"
+    | "coming-of-age"
+    | "slice-of-life";
   genreName: Localized;
   art: string;
+  sample: boolean;
+};
+export type Chapter = {
+  slug: string;
+  title: Localized;
   paragraphs: Record<Locale, string[]>;
 };
+export type ShortStory = StoryBase & {
+  format: "short";
+  status: "completed";
+  paragraphs: Record<Locale, string[]>;
+};
+export type SerialStory = StoryBase & {
+  format: "serial";
+  status: "ongoing" | "completed" | "paused";
+  chapters: Chapter[];
+};
+export type Story = ShortStory | SerialStory;
 export const stories: Story[] = [
   {
     slug: "the-first-world",
@@ -20,6 +41,9 @@ export const stories: Story[] = [
     genre: "fantasy",
     genreName: { en: "Fantasy", zh: "奇幻" },
     art: "door",
+    format: "short",
+    status: "completed",
+    sample: true,
     paragraphs: {
       en: [
         "The door had not been there yesterday. Lin was certain of that. Yesterday there had been only the sea, the pale sand, and the particular silence that comes just before sunrise.",
@@ -49,6 +73,9 @@ export const stories: Story[] = [
     genre: "science-fiction",
     genreName: { en: "Science fiction", zh: "科幻" },
     art: "moon",
+    format: "short",
+    status: "completed",
+    sample: true,
     paragraphs: {
       en: [
         "Every morning, June checked the brass letterbox. Every morning, it was empty. Until Tuesday, when she found an envelope dated Wednesday.",
@@ -78,6 +105,9 @@ export const stories: Story[] = [
     genre: "adventure",
     genreName: { en: "Adventure", zh: "冒险" },
     art: "mountain",
+    format: "short",
+    status: "completed",
+    sample: true,
     paragraphs: {
       en: [
         "The mapmaker left one instruction: Do not draw the edges.",

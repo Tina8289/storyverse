@@ -1,12 +1,13 @@
-import { PageIntro, JourneyCTA, SampleNote } from "@/components/ui";
+import { PageIntro, JourneyCTA } from "@/components/ui";
 import { StoryLibrary } from "@/components/StoryLibrary";
+import { parseCollection, genres } from "@/lib/story-categories";
 import { stories } from "@/lib/content";
 import { getLocale } from "@/lib/locale";
 import { text } from "@/lib/i18n";
 import { pageMetadata } from "@/lib/seo";
 type Props = {
   params: Promise<{ locale: string }>;
-  searchParams: Promise<{ genre?: string }>;
+  searchParams: Promise<{ genre?: string; collection?: string }>;
 };
 export async function generateMetadata({ params }: Props) {
   const l = getLocale((await params).locale);
@@ -23,8 +24,10 @@ export async function generateMetadata({ params }: Props) {
 }
 export default async function Stories({ params, searchParams }: Props) {
   const locale = getLocale((await params).locale);
-  const requestedGenre = (await searchParams).genre;
-  const genre = stories.some((story) => story.genre === requestedGenre)
+  const { genre: requestedGenre, collection: requestedCollection } =
+    await searchParams;
+  const collection = parseCollection(requestedCollection);
+  const genre = genres.some((genre) => genre.value === requestedGenre)
     ? requestedGenre
     : "all";
   return (
@@ -33,23 +36,21 @@ export default async function Stories({ params, searchParams }: Props) {
         eyebrow={text(locale, "The reading room", "故事阅览室")}
         title={text(
           locale,
-          "Choose a world. Stay a while.",
-          "选择一个世界，停留片刻。",
+          "A short escape. A longer journey.",
+          "一篇短故事，一段长旅程。",
         )}
         summary={text(
           locale,
-          "A door by the sea. A letter from tomorrow. A map with no edges. Follow your curiosity into a story.",
-          "海边的一扇门，来自明天的一封信，没有边界的一张地图。跟随好奇心，走进故事。",
+          "Read an independent short, follow an ongoing serial, or explore a completed multi-chapter work.",
+          "读一篇独立短篇，追一部连载，或从头读完一部长篇。选择适合此刻的阅读方式。",
         )}
       />
-      <div className="container">
-        <SampleNote locale={locale} />
-      </div>
       <StoryLibrary
-        key={genre}
+        key={`${collection}:${genre}`}
         stories={stories}
         locale={locale}
         initialGenre={genre}
+        collection={collection}
       />
       <JourneyCTA locale={locale} />
     </>

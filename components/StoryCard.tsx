@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
+import { storyLabel } from "@/lib/story-categories";
 import type { Story } from "@/lib/content";
 import { text, type Locale } from "@/lib/i18n";
 export function StoryCard({ story, locale }: { story: Story; locale: Locale }) {
@@ -23,7 +24,17 @@ export function StoryCard({ story, locale }: { story: Story; locale: Locale }) {
         </div>
         <div className="card-meta">
           <span>{story.genreName[locale]}</span>
-          <span>{text(locale, "Sample short", "示例短篇")}</span>
+          <span>{storyLabel(story, locale)}</span>
+          {story.sample ? <span>{text(locale, "Sample", "示例")}</span> : null}
+          {story.format === "serial" ? (
+            <span>
+              {text(
+                locale,
+                `${story.chapters.length} chapters`,
+                `${story.chapters.length} 章`,
+              )}
+            </span>
+          ) : null}
         </div>
         <h3>
           {story.title[locale]}

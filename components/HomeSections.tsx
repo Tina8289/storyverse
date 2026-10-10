@@ -187,7 +187,7 @@ export function WorldSeries({ locale: l }: { locale: Locale }) {
   return (
     <section className="home-section">
       <HomeHeading
-        title={text(l, "Story worlds", "故事系列")}
+        title={text(l, "Explore genres", "探索题材")}
         subtitle={text(
           l,
           "Different worlds. The same imagination.",

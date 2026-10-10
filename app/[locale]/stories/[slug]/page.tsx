@@ -1,3 +1,5 @@
+import { SerialContents } from "@/components/SerialContents";
+import { storyLabel } from "@/lib/story-categories";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -15,7 +17,13 @@ export async function generateMetadata({ params }: Props) {
   const l = getLocale(locale);
   const s = stories.find((s) => s.slug === slug);
   if (!s) notFound();
-  return pageMetadata(l, `/stories/${slug}`, s.title[l], s.summary[l], true);
+  return pageMetadata(
+    l,
+    `/stories/${slug}`,
+    s.title[l],
+    s.summary[l],
+    s.sample,
+  );
 }
 export default async function Story({ params }: Props) {
   const { locale, slug } = await params;
@@ -32,14 +40,16 @@ export default async function Story({ params }: Props) {
             {text(l, "← All stories", "← 全部故事")}
           </Link>
           <p className="eyebrow">
-            {story.genreName[l]} · {text(l, "Sample short", "示例短篇")}
+            {story.genreName[l]} · {storyLabel(story, l)}
           </p>
           <h1>{story.title[l]}</h1>
           <p className="intro-summary">{story.summary[l]}</p>
-          <SampleNote locale={l} />
-          <a className="text-link" href="#story-text">
-            {text(l, "Begin reading ↓", "开始阅读 ↓")}
-          </a>
+          {story.sample ? <SampleNote locale={l} /> : null}
+          {story.format === "short" ? (
+            <a className="text-link" href="#story-text">
+              {text(l, "Begin reading ↓", "开始阅读 ↓")}
+            </a>
+          ) : null}
         </header>
         <div className="container reader-art">
           <Image
@@ -54,15 +64,21 @@ export default async function Story({ params }: Props) {
             sizes="100vw"
           />
         </div>
-        <div id="story-text" className="reading prose">
-          <p className="eyebrow">{text(l, "A short story", "一段短篇故事")}</p>
-          {story.paragraphs[l].map((p) => (
-            <p key={p}>{p}</p>
-          ))}
-          <div className="end-mark" aria-label={text(l, "End", "全文完")}>
-            ✦
+        {story.format === "serial" ? (
+          <SerialContents story={story} locale={l} />
+        ) : (
+          <div id="story-text" className="reading prose">
+            <p className="eyebrow">
+              {text(l, "A short story", "一段短篇故事")}
+            </p>
+            {story.paragraphs[l].map((p) => (
+              <p key={p}>{p}</p>
+            ))}
+            <div className="end-mark" aria-label={text(l, "End", "全文完")}>
+              ✦
+            </div>
           </div>
-        </div>
+        )}
       </article>
       <section className="reading reader-next">
         <p className="eyebrow">

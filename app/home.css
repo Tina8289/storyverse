@@ -1140,3 +1140,123 @@
   color: #665d77;
   font-size: 14px;
 }
+.story-collections {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  border-bottom: 1px solid #e3dbf0;
+  padding-bottom: 20px;
+  margin-bottom: 18px;
+}
+.story-collections a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 18px;
+  border-radius: 9px;
+  background: #f2eff8;
+  font-size: 15px;
+}
+.story-collections a[aria-current="page"] {
+  background: #6541cf;
+  color: white;
+}
+.story-collections a span {
+  font-size: 11px;
+  opacity: 0.85;
+}
+.collection-description {
+  color: #6e647c;
+  font-size: 14px;
+  margin-bottom: 25px;
+}
+.collection-empty {
+  padding: 35px 25px;
+  text-align: center;
+  background: #f5f2fb;
+  border-radius: 12px;
+}
+.collection-empty h2 {
+  font-size: 23px;
+}
+.collection-empty p {
+  color: #6c627b;
+  font-size: 14px;
+  margin-top: 10px;
+}
+.sample-library {
+  margin-top: 40px;
+}
+.sample-library > h2 {
+  font-size: 24px;
+}
+.sample-library > p {
+  color: #6c627b;
+  font-size: 13px;
+  margin: 12px 0 24px;
+}
+.serial-contents {
+  padding-block: 40px 65px;
+}
+.serial-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 35px;
+}
+.serial-contents h2 {
+  font-size: 29px;
+}
+.serial-contents h2 small {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  color: #71667c;
+  margin-left: 12px;
+}
+.serial-contents ol {
+  list-style: none;
+  padding: 0;
+  margin-top: 25px;
+}
+.serial-contents li {
+  border-bottom: 1px solid #e1d9eb;
+}
+.serial-contents li a {
+  display: flex;
+  gap: 20px;
+  padding: 20px 0;
+  align-items: center;
+}
+.serial-contents li a span {
+  font-size: 13px;
+  color: #766788;
+}
+.serial-contents li a span:last-child {
+  margin-left: auto;
+}
+.chapter-navigation {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  flex-wrap: wrap;
+  font-size: 14px;
+}
+.chapter-navigation > a {
+  color: #6040b7;
+}
+.chapter-navigation > span {
+  color: #756a7e;
+}
+@media (max-width: 640px) {
+  .story-collections {
+    gap: 8px;
+  }
+  .story-collections a {
+    padding: 11px 13px;
+    font-size: 13px;
+  }
+  .chapter-navigation {
+    font-size: 12px;
+  }
+}

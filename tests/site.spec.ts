@@ -120,3 +120,31 @@ test("reference homepage sections and working world discovery", async ({
   await page.getByRole("searchbox", { name: "搜索故事" }).fill("明天");
   await expect(page.locator(".story-card")).toHaveCount(1);
 });
+
+test("separate short stories and serials with honest empty states", async ({
+  page,
+}) => {
+  await page.goto("/zh/stories");
+  const categories = page.getByRole("navigation", { name: "作品分类" });
+  await expect(
+    categories.getByRole("link", { name: /独立短篇/ }),
+  ).toBeVisible();
+  await categories.getByRole("link", { name: /连载中/ }).click();
+  await expect(page).toHaveURL(/collection=ongoing/);
+  await expect(page.locator(".story-card")).toHaveCount(0);
+  await expect(page.locator(".collection-empty")).toContainText("即将与你相遇");
+  await page.reload();
+  await expect(
+    categories.getByRole("link", { name: /连载中/ }),
+  ).toHaveAttribute("aria-current", "page");
+  await categories.getByRole("link", { name: /已完结长篇/ }).click();
+  await expect(page.locator(".story-card")).toHaveCount(0);
+  await categories.getByRole("link", { name: /独立短篇/ }).click();
+  await expect(page.locator(".sample-library .story-card")).toHaveCount(3);
+  await page.getByRole("button", { name: "奇幻", exact: true }).click();
+  await expect(page.locator(".story-card")).toHaveCount(1);
+  const invalid = await page.goto(
+    "/zh/stories/the-first-world/chapters/missing",
+  );
+  expect(invalid?.status()).toBe(404);
+});
