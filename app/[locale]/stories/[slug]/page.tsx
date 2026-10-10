@@ -43,7 +43,11 @@ export default async function Story({ params }: Props) {
         </header>
         <div className="container reader-art">
           <Image
-            src={`/art/${story.art}.svg`}
+            src={
+              story.art === "door"
+                ? "/art/storyverse-hero.png"
+                : "/art/storyverse-worlds.png"
+            }
             alt=""
             fill
             priority

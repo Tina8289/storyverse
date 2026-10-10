@@ -1,5 +1,8 @@
 import Link from "next/link";
 import { navigation, text, type Locale } from "@/lib/i18n";
+import { Brand } from "./Brand";
+import { ArrowUp, Mail } from "lucide-react";
+import { siteConfig } from "@/lib/site";
 export function Footer({ locale }: { locale: Locale }) {
   return (
     <footer className="footer">
@@ -7,7 +10,7 @@ export function Footer({ locale }: { locale: Locale }) {
         <div className="footer-top">
           <div>
             <Link className="brand" href={`/${locale}`}>
-              StoryVerse<span>.</span>
+              <Brand locale={locale} />
             </Link>
             <p>
               {text(
@@ -24,6 +27,24 @@ export function Footer({ locale }: { locale: Locale }) {
               </Link>
             ))}
           </nav>
+          <div className="footer-actions">
+            <a
+              href={`mailto:${siteConfig.email}`}
+              aria-label={text(
+                locale,
+                "Email StoryVerse",
+                "给 StoryVerse 写信",
+              )}
+            >
+              <Mail size={20} aria-hidden="true" />
+            </a>
+            <a
+              href="#main"
+              aria-label={text(locale, "Back to top", "回到顶部")}
+            >
+              <ArrowUp size={20} aria-hidden="true" />
+            </a>
+          </div>
         </div>
         <div className="footer-bottom">
           <span>© {new Date().getFullYear()} StoryVerse</span>

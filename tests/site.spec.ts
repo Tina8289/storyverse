@@ -61,7 +61,7 @@ test("navigation, real contact link, journal, and unknown content", async ({
     .getByRole("link", { name: "Contact", exact: true })
     .click();
   await expect(
-    page.locator('a[href="mailto:samiyah.china@gmail.com"]'),
+    page.locator('.contact-email[href="mailto:samiyah.china@gmail.com"]'),
   ).toBeVisible();
   if (isMobile)
     await expect(
@@ -93,4 +93,30 @@ test("all published internal links resolve and discovery endpoints work", async 
   const og = await request.get("/og");
   expect(og.status()).toBe(200);
   expect(og.headers()["content-type"]).toContain("image/png");
+});
+
+test("reference homepage sections and working world discovery", async ({
+  page,
+}) => {
+  await page.goto("/zh");
+  await expect(page.locator(".cinema-hero h1")).toContainText(
+    "每一个伟大的世界",
+  );
+  await expect(page.locator(".inspiration")).toBeVisible();
+  await expect(page.locator(".world-tile")).toHaveCount(4);
+  await expect(page.locator(".creative-journey li")).toHaveCount(6);
+  await expect(page.locator(".journey-mail")).toHaveAttribute(
+    "href",
+    /^mailto:/,
+  );
+  await page.locator(".world-right").click();
+  await expect(
+    page.getByRole("button", { name: "科幻", exact: true }),
+  ).toHaveAttribute("aria-pressed", "true");
+  await expect(page.locator(".story-card")).toHaveCount(1);
+  await page.getByRole("searchbox", { name: "搜索故事" }).fill("不存在的故事");
+  await expect(page.locator(".story-card")).toHaveCount(0);
+  await expect(page.locator(".search-empty")).toBeVisible();
+  await page.getByRole("searchbox", { name: "搜索故事" }).fill("明天");
+  await expect(page.locator(".story-card")).toHaveCount(1);
 });

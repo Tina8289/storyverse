@@ -1,77 +1,58 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
-import { ButtonLink } from "./ui";
+import { ArrowDown, ArrowRight, BookOpen, Sparkles } from "lucide-react";
 import { text, type Locale } from "@/lib/i18n";
 export function Hero({ locale }: { locale: Locale }) {
   return (
-    <section className="container hero">
-      <div className="hero-copy">
-        <p className="eyebrow">
-          <span className="status-dot" />
-          {text(
-            locale,
-            "An independent story universe",
-            "一个独立生长的故事宇宙",
-          )}
-        </p>
+    <section className="cinema-hero">
+      <Image
+        src="/art/storyverse-hero.png"
+        alt={text(
+          locale,
+          "An imagined storyteller and her cat overlooking a magical sea at sunset",
+          "插画中的少女与猫咪，在落日下眺望奇幻海洋",
+        )}
+        fill
+        priority
+        sizes="100vw"
+      />
+      <div className="cinema-shade" />
+      <div className="container cinema-content">
         <h1>
-          {text(locale, "A small story.", "一个小故事。")}
+          {text(locale, "Every great universe", "每一个伟大的世界")}
           <br />
-          {text(locale, "A whole", "一个完整的")}
-          <br />
-          <span>{text(locale, "new world.", "新世界。")}</span>
+          {text(locale, "begins with a small story.", "都始于一个小小的故事")}
         </h1>
-        <p className="hero-summary">
+        <p className="cinema-subtitle">
           {text(
             locale,
-            "For the worlds we imagine, and the people we become. Original stories and notes from a creative life in progress.",
-            "写给我们想象的世界，也写给正在成长的自己。在这里，读故事，也看见创作的过程。",
+            "Original fiction · Imagined worlds · Future animation",
+            "原创小说 · 想象世界 · 未来动画",
           )}
         </p>
-        <div className="hero-buttons">
-          <ButtonLink href={`/${locale}/stories`}>
-            {text(locale, "Find your next story", "发现下一个故事")}
-          </ButtonLink>
-          <Link className="text-link" href={`/${locale}/about`}>
-            {text(locale, "Our story", "我们的故事")}
-            <ArrowUpRight size={17} aria-hidden="true" />
+        <p className="cinema-description">
+          {text(
+            locale,
+            "Stories that begin in Chinese, and an imagination that reaches beyond the horizon.",
+            "从中文出发，用想象力书写更温柔的世界。",
+          )}
+        </p>
+        <div className="cinema-buttons">
+          <Link className="button primary" href={`/${locale}/stories`}>
+            <BookOpen size={18} aria-hidden="true" />
+            {text(locale, "Start reading", "开始阅读故事")}
+            <ArrowRight size={17} aria-hidden="true" />
+          </Link>
+          <Link className="button cinema-secondary" href={`/${locale}/about`}>
+            <Sparkles size={17} aria-hidden="true" />
+            {text(locale, "Discover the vision", "了解创作愿景")}
           </Link>
         </div>
-        <div className="hero-footnote">
-          <span className="mini-line" />
-          {text(
-            locale,
-            "One imagination. Many possible worlds.",
-            "一种想象，无数可能。",
-          )}
-        </div>
+        <a className="explore-down" href="#discover">
+          <ArrowDown size={20} aria-hidden="true" />
+          {text(locale, "Explore below", "向下探索")}
+        </a>
       </div>
-      <Link href={`/${locale}/stories/the-first-world`} className="hero-art">
-        <Image
-          src="/art/door.svg"
-          alt={text(
-            locale,
-            "An open doorway standing in a violet sea, facing a distant island",
-            "紫色海面上的一扇门，通向远方的岛屿",
-          )}
-          fill
-          priority
-          sizes="(max-width: 800px) 100vw, 50vw"
-        />
-        <span className="art-top">STORYVERSE ORIGINAL WORLDS</span>
-        <div className="art-caption">
-          <div>
-            <span>
-              {text(locale, "Explore a sample world", "探索示例世界")}
-            </span>
-            <h2>{text(locale, "The First World", "第一个世界")}</h2>
-          </div>
-          <span className="round-arrow">
-            <ArrowUpRight size={22} aria-hidden="true" />
-          </span>
-        </div>
-      </Link>
     </section>
   );
 }

@@ -59,7 +59,7 @@ export default async function About({ params }: Props) {
       <section className="container about-grid">
         <div className="about-art">
           <Image
-            src="/art/mountain.svg"
+            src="/art/storyverse-worlds.png"
             alt={text(
               l,
               "A path across a quiet landscape toward distant mountains",

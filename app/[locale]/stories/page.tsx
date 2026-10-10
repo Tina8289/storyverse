@@ -4,7 +4,10 @@ import { stories } from "@/lib/content";
 import { getLocale } from "@/lib/locale";
 import { text } from "@/lib/i18n";
 import { pageMetadata } from "@/lib/seo";
-type Props = { params: Promise<{ locale: string }> };
+type Props = {
+  params: Promise<{ locale: string }>;
+  searchParams: Promise<{ genre?: string }>;
+};
 export async function generateMetadata({ params }: Props) {
   const l = getLocale((await params).locale);
   return pageMetadata(
@@ -18,8 +21,12 @@ export async function generateMetadata({ params }: Props) {
     ),
   );
 }
-export default async function Stories({ params }: Props) {
+export default async function Stories({ params, searchParams }: Props) {
   const locale = getLocale((await params).locale);
+  const requestedGenre = (await searchParams).genre;
+  const genre = stories.some((story) => story.genre === requestedGenre)
+    ? requestedGenre
+    : "all";
   return (
     <>
       <PageIntro
@@ -38,7 +45,12 @@ export default async function Stories({ params }: Props) {
       <div className="container">
         <SampleNote locale={locale} />
       </div>
-      <StoryLibrary stories={stories} locale={locale} />
+      <StoryLibrary
+        key={genre}
+        stories={stories}
+        locale={locale}
+        initialGenre={genre}
+      />
       <JourneyCTA locale={locale} />
     </>
   );

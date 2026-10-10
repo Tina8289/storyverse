@@ -9,7 +9,11 @@ export function StoryCard({ story, locale }: { story: Story; locale: Locale }) {
       <Link href={`/${locale}/stories/${story.slug}`}>
         <div className="story-cover">
           <Image
-            src={`/art/${story.art}.svg`}
+            src={
+              story.art === "door"
+                ? "/art/storyverse-hero.png"
+                : "/art/storyverse-worlds.png"
+            }
             alt=""
             fill
             sizes="(max-width: 700px) 100vw, 33vw"

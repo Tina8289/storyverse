@@ -2,8 +2,9 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { Globe2, Menu, X } from "lucide-react";
+import { Globe2, Menu, X, Search } from "lucide-react";
 import { navigation, text, type Locale } from "@/lib/i18n";
+import { Brand } from "./Brand";
 export function Header({ locale }: { locale: Locale }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
@@ -16,7 +17,7 @@ export function Header({ locale }: { locale: Locale }) {
           href={`/${locale}`}
           onClick={() => setOpen(false)}
         >
-          StoryVerse<span>.</span>
+          <Brand locale={locale} />
         </Link>
         <nav
           id="main-navigation"
@@ -42,6 +43,13 @@ export function Header({ locale }: { locale: Locale }) {
         </nav>
         <div className="header-actions">
           <Link
+            className="header-search"
+            href={`/${locale}/stories#story-search`}
+            aria-label={text(locale, "Search stories", "搜索故事")}
+          >
+            <Search size={19} aria-hidden="true" />
+          </Link>
+          <Link
             className="language-link"
             href={pathname.replace(/^\/(en|zh)(?=\/|$)/, `/${other}`)}
             hrefLang={other === "zh" ? "zh-CN" : "en"}
@@ -50,6 +58,12 @@ export function Header({ locale }: { locale: Locale }) {
           >
             <Globe2 size={16} aria-hidden="true" />
             <span>{locale === "en" ? "中文" : "EN"}</span>
+          </Link>
+          <Link
+            className="button primary header-read"
+            href={`/${locale}/stories`}
+          >
+            {text(locale, "Start reading", "开始阅读")}
           </Link>
           <button
             className="menu-button"
