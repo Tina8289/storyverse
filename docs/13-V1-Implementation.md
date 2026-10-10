@@ -45,4 +45,4 @@ The production dependency audit reports no known vulnerabilities. The developmen
 
 Local production build, strict type checking, lint, and all 10 Playwright desktop/mobile tests passed. Automated WCAG A/AA checks passed for the five core pages in both languages. Checks include canonical metadata, document language, overflow, genre filtering, same-page language switching, complete story navigation, mailto target, journal reading, genuine 404 status, internal links, sitemap, robots, and the PNG social card. Desktop and mobile screenshots were visually reviewed. Automated accessibility checks are not a substitute for a full manual audit.
 
-At initial deployment, Vercel's existing login protection is retained. Making the production URL publicly accessible requires the owner's explicit approval; preview deployments should remain protected.
+Vercel's existing login-protection settings are retained without modification. The production alias was verified with an unauthenticated request and serves the website publicly; no access-control change is needed. GitHub pushes to main trigger the linked Vercel production deployment.
