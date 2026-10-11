@@ -6,7 +6,7 @@ Chapter 4: investigators arrive at the cordoned Jian’an apartment building at 
 
 Chapter 5: investigators compare missing-person files at a temporary station in an apartment stairwell. AI-generated scene without graphic remains. Asset: public/art/gui-ling-chapter-5.webp, 1672 × 941, 77,048 bytes. Both language editions share this chapter-specific illustration.
 
-Chapters 1–3 and 16–27 still need their own illustrations.
+Chapters 1–3 and 19–27 still need their own illustrations.
 
 Chapter 6: Investigators and fire-rescue personnel examine a concealed drainage culvert in the old quarter at night. Built-in image generation. Asset: public/art/gui-ling-chapter-6.webp, 1672 × 941, 71,320 bytes. Prompt: cinematic realistic contemporary Chinese investigation, chapter-specific scene, no visible gore, no text or watermark.
 
@@ -27,3 +27,9 @@ Chapter 13: Lu Zheng keeps watch beside Shen Yu’an in a quiet hospital room at
 Chapter 14: Investigators discover the abandoned gray cargo truck in the misty freight yard. Built-in image generation. Asset: public/art/gui-ling-chapter-14.webp, 1672 × 941, 79,282 bytes. Prompt: cinematic realistic contemporary China, chapter-specific scene, no visible gore, no text or watermark.
 
 Chapter 15: Lu Zheng helps move heavy case files from Shen Yu’an’s desk after his return to work. Built-in image generation. Asset: public/art/gui-ling-chapter-15.webp, 1672 × 941, 76,582 bytes. Prompt: cinematic realistic contemporary China, chapter-specific scene, no visible gore, no text or watermark.
+
+Chapter 16: Lu Zheng shelters Shen Yu’an from the wind while technicians collect white rose petals at the sculpture park. Built-in image generation. Asset: public/art/gui-ling-chapter-16.webp, 1672 × 941, 73,230 bytes. Prompt: cinematic realistic contemporary China, chapter-specific scene, no visible gore, no text or watermark.
+
+Chapter 17: Lu Zheng and Shen Yu’an examine scratches in the dusty basement of the abandoned library. Built-in image generation. Asset: public/art/gui-ling-chapter-17.webp, 1672 × 941, 74,150 bytes. Prompt: cinematic realistic contemporary China, chapter-specific scene, no visible gore, no text or watermark.
+
+Chapter 18: Investigators discover dried white rose petals on the elevated maintenance walkway above an abandoned swimming pool. Built-in image generation. Asset: public/art/gui-ling-chapter-18.webp, 1672 × 941, 78,578 bytes. Prompt: cinematic realistic contemporary China, chapter-specific scene, no visible gore, no text or watermark.
