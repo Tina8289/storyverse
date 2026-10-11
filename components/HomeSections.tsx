@@ -127,7 +127,7 @@ export function FeaturedStory({ locale: l }: { locale: Locale }) {
                   l,
                   story.sample
                     ? "A notebook, an impossible door, and the courage to imagine what comes next. Begin with a short journey into a world still taking shape."
-                    : `By ${story.author}. English translation in progress.`,
+                    : `By ${story.author}. ${story.translationTotal ? "English translation in progress." : "Complete English edition."}`,
                   story.sample
                     ? "一本笔记，一扇不可能出现的门，以及想象下一步的勇气。从一段短篇开始，走进正在成形的世界。"
                     : `作者：${story.author}。全 ${story.format === "serial" ? story.chapters.length : 1} 章，已完结。`,
@@ -146,7 +146,13 @@ export function FeaturedStory({ locale: l }: { locale: Locale }) {
                 <BookOpen size={17} aria-hidden="true" />
                 {story.sample
                   ? text(l, "Sample short", "示例短篇")
-                  : text(l, "Translation in progress", "已完结连载")}
+                  : text(
+                      l,
+                      story.translationTotal
+                        ? "Translation in progress"
+                        : "Completed serial",
+                      "已完结连载",
+                    )}
               </li>
               <li>
                 <Clock3 size={17} aria-hidden="true" />

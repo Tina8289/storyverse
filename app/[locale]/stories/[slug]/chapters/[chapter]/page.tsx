@@ -65,6 +65,7 @@ export default async function ChapterPage({ params }: Props) {
           <Image
             src={entry.illustration.src}
             alt={entry.illustration.alt[l]}
+            style={{ objectPosition: entry.illustration.objectPosition }}
             fill
             priority
             unoptimized

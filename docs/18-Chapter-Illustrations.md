@@ -6,7 +6,7 @@ Chapter 4: investigators arrive at the cordoned Jian’an apartment building at 
 
 Chapter 5: investigators compare missing-person files at a temporary station in an apartment stairwell. AI-generated scene without graphic remains. Asset: public/art/gui-ling-chapter-5.webp, 1672 × 941, 77,048 bytes. Both language editions share this chapter-specific illustration.
 
-Chapters 1–3 and 22–27 still need their own illustrations.
+Chapters 4–27 have independent illustrations; the continuation from chapter 6 through chapter 27 is fully illustrated. Chapters 1–3 predate this continuation and have no chapter-specific illustration.
 
 Chapter 6: Investigators and fire-rescue personnel examine a concealed drainage culvert in the old quarter at night. Built-in image generation. Asset: public/art/gui-ling-chapter-6.webp, 1672 × 941, 71,320 bytes. Prompt: cinematic realistic contemporary Chinese investigation, chapter-specific scene, no visible gore, no text or watermark.
 
@@ -39,3 +39,17 @@ Chapter 19: Lu Zheng and Shen Yu’an investigate white rose petals on the obser
 Chapter 20: Technicians document black datura petals beneath an abandoned cooling tower while Lu Zheng places a coat over Shen Yu’an’s shoulders. Built-in image generation. Asset: public/art/gui-ling-chapter-20.webp, 1672 × 941, 75,038 bytes. Prompt: cinematic realistic contemporary China, chapter-specific scene, no visible gore, no text or watermark.
 
 Chapter 21: Su Heng leaves the bureau under a black umbrella while a gray surveillance van waits across the rainy street. Built-in image generation. Asset: public/art/gui-ling-chapter-21.webp, 1672 × 941, 78,018 bytes. Prompt: cinematic realistic contemporary China, chapter-specific scene, no visible gore, no text or watermark.
+
+Chapter 22: Lu Zheng questions Lin Zhinuan in her apartment beside a vase of pale camellias. Built-in image generation. Asset: public/art/gui-ling-chapter-22.webp, 1672 × 941, 77,186 bytes. Prompt: cinematic realistic contemporary China, chapter-specific scene, no visible gore, no text or watermark.
+
+Chapter 23: Lu Zheng studies the missing center of the case board; a symbolic black rose evokes the hidden mastermind. Built-in image generation. Asset: public/art/gui-ling-chapter-23.webp, 1672 × 941, 71,724 bytes. Prompt: cinematic realistic contemporary China, chapter-specific scene, no visible gore, no text or watermark.
+
+Chapter 24: Lu Zheng reviews case files at home while Shen Yu’an prepares dinner in the warm kitchen. Built-in image generation. Asset: public/art/gui-ling-chapter-24.webp, 1672 × 941, 70,568 bytes. Prompt: cinematic realistic contemporary China, chapter-specific scene, no visible gore, no text or watermark.
+
+Chapter 25: A rain-soaked Lu Zheng steps back from Shen Yu’an at their apartment doorway. Built-in image generation. Asset: public/art/gui-ling-chapter-25.webp, 1672 × 941, 75,174 bytes. Prompt: cinematic realistic contemporary China, chapter-specific scene, no visible gore, no text or watermark.
+
+Chapter 26: Lu Zheng makes the call while Shen Yu’an sits calmly beside a folded apron. Built-in image generation. Asset: public/art/gui-ling-chapter-26.webp, 1672 × 941, 64,700 bytes. Prompt: cinematic realistic contemporary China, chapter-specific scene, no visible gore, no text or watermark.
+
+Chapter 27: Lu Zheng watches a helicopter vanish into the rain from the shattered balcony. Built-in image generation. Asset: public/art/gui-ling-chapter-27.webp, 1672 × 941, 76,912 bytes. Prompt: cinematic realistic contemporary China, chapter-specific scene, no visible gore, no text or watermark.
+
+Chapter 27 uses a top-aligned image focal position so the helicopter remains visible in the existing 380px desktop / 270px mobile reader container. Asset dimensions are unchanged.

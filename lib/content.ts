@@ -22,7 +22,7 @@ export type StoryBase = {
   sourceUrl?: string;
 };
 export type Chapter = {
-  illustration?: { src: string; alt: Localized };
+  illustration?: { src: string; alt: Localized; objectPosition?: string };
   sourceUrl?: string;
   slug: string;
   title: Localized;
